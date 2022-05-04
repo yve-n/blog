@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CategoryController!{% endblock %}
+{% block title %}symfony blog{% endblock %}
 
 {% block body %}
     <style>
@@ -40,8 +40,8 @@
                 <td>{{ category.name }}</td>
                 <td>
                     <div class="d-flex gap-2 justify-content-end">
-                        <a href="#" class="btn btn-warning">Edit</a>
-                        <form method="post" action="">
+                        <a href="{{path('update_category', {id : category.id})}}" class="btn btn-warning">Edit</a>
+                        <form method="post" action="{{path('delete_category', {id:category.id})}}">
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
                     </div>

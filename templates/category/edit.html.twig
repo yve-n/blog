@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}symfony blog!{% endblock %}
+
+{% block body %}
+    <style>
+        .form  { width: 700px; box-sizing: border-box;
+            background-color: white;  outline: 1px solid transparent;
+            padding: 20px 5px 20px 5px;
+            border-radius: 5px 5px 5px 5px;
+            box-shadow: inset 0 0.75rem 2rem rgba(229, 225, 187, 0.5);
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+    </style>
+    <div class="form container">
+        <h3 style="text-align: center"> update a category! ✅</h3>
+        {{form_start(formUpdate)}}
+        <div class="container" style="margin-bottom: 20px;">
+            <div class="mb-3">
+                {{form_row(formUpdate.name)}}
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+        {{form_end(formUpdate)}}
+    </div>
+
+{% endblock %}

@@ -36,4 +36,45 @@ class CategoryController extends AbstractController
             'categories' => $categoryRepository->findAll(),
         ]);
     }
+
+    /**
+     * @Route("/category/delete/{id}", name="delete_category")
+     */
+    public function deleteCategory(Request $request, ManagerRegistry $doctrine, CategoryRepository $categoryRepository): Response
+    {
+        $category = $categoryRepository->findOneBy(['id'=> $request->get('id')]);
+        if($category){
+            $categoryRepository->remove($category);
+
+            return $this->redirectToRoute('category');
+        }
+        return $this->render('category/index.html.twig', []);
+    }
+
+    /**
+     * @Route("/category/update/{id}", name="update_category")
+     */
+    public function updateCategory(Request $request, ManagerRegistry $doctrine, CategoryRepository $categoryRepository): Response
+    {
+        $category = $categoryRepository->findOneBy(['id'=> $request->get('id')]);
+
+        if($category){
+            $formUpdate = $this->createForm(CategoryType::class, $category);
+            $formUpdate->handleRequest($request);
+
+            if($formUpdate->isSubmitted() && $formUpdate->isValid()) {
+                $em = $doctrine->getManager();
+                $em->persist($formUpdate->getData());
+                $em->flush();
+
+                return $this->redirectToRoute('category');
+            }
+        } else {
+            return $this->redirectToRoute('category');
+        }
+
+        return $this->render('category/edit.html.twig', [
+            'formUpdate' => $formUpdate->createView(),
+        ]);
+    }
 }
