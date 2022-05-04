@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CategoryController!{% endblock %}
+
+{% block body %}
+    <style>
+        .form  { width: 700px; box-sizing: border-box;
+            background-color: white;  outline: 1px solid transparent;
+            padding: 20px 5px 20px 5px;
+            border-radius: 5px 5px 5px 5px;
+            box-shadow: inset 0 0.75rem 2rem rgba(229, 225, 187, 0.5);
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+    </style>
+    <div class="form container">
+        <h3 style="text-align: center"> Add new category! ✅</h3>
+        {{form_start(form)}}
+            <div class="container" style="margin-bottom: 20px;">
+                <div class="mb-3">
+                    {{form_row(form.name)}}
+                </div>
+                <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+        {{form_end(form)}}
+    </div>
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {%for category in categories%}
+            <tr>
+                <th scope="row">{{category.id}}</th>
+                <td>{{ category.name }}</td>
+                <td>
+                    <div class="d-flex gap-2 justify-content-end">
+                        <a href="#" class="btn btn-warning">Edit</a>
+                        <form method="post" action="">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            {%endfor%}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
