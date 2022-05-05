@@ -10,17 +10,17 @@ use App\Repository\PostRepository;
 class PostController extends AbstractController
 {
     /**
-     * @Route("/post", name="app_post")
+     * @Route("/post", name="post")
      */
     public function index(PostRepository $postRepository): Response
     {
         $user_id = 1;
-        $post = $postRepository->findByUser_id($user_id);
+//        $post = $postRepository->findByUser_id($user_id);
         $posts = $postRepository->findAll();
         return $this->render('post/index.html.twig', [
             'controller_name' => 'PostController',
-            'posts'           => $post,
-            'all'             => $posts
+            'posts'           => $posts,
+//            'all'             => $posts
         ]);
     }
 }

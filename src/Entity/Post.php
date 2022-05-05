@@ -39,7 +39,7 @@ class Post
     private $id_category;
 
     /**
-     * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $date_publication;
 
@@ -96,12 +96,12 @@ class Post
         return $this;
     }
 
-    public function getDatePublication(): ?\DateTimeImmutable
+    public function getDatePublication(): ?string
     {
         return $this->date_publication;
     }
 
-    public function setDatePublication(?\DateTimeImmutable $date_publication): self
+    public function setDatePublication(?string $date_publication): self
     {
         $this->date_publication = $date_publication;
 
