@@ -30,13 +30,13 @@ class Category
     private $slug;
 
     /**
-     * @ORM\OneToMany(targetEntity=Post::class, mappedBy="id_category", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Post::class, mappedBy="category")
      */
-    private $post_id;
+    private $posts;
 
     public function __construct()
     {
-        $this->post_id = new ArrayCollection();
+        $this->posts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -71,27 +71,27 @@ class Category
     /**
      * @return Collection<int, Post>
      */
-    public function getPostId(): Collection
+    public function getPosts(): Collection
     {
-        return $this->post_id;
+        return $this->posts;
     }
 
-    public function addPostId(Post $postId): self
+    public function addPost(Post $post): self
     {
-        if (!$this->post_id->contains($postId)) {
-            $this->post_id[] = $postId;
-            $postId->setIdCategory($this);
+        if (!$this->posts->contains($post)) {
+            $this->posts[] = $post;
+            $post->setCategory($this);
         }
 
         return $this;
     }
 
-    public function removePostId(Post $postId): self
+    public function removePost(Post $post): self
     {
-        if ($this->post_id->removeElement($postId)) {
+        if ($this->posts->removeElement($post)) {
             // set the owning side to null (unless already changed)
-            if ($postId->getIdCategory() === $this) {
-                $postId->setIdCategory(null);
+            if ($post->getCategory() === $this) {
+                $post->setCategory(null);
             }
         }
 

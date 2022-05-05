@@ -3,16 +3,13 @@
 {% block title %}Hello DashboardController!{% endblock %}
 
 {% block body %}
-<style>
-
-</style>
     <h2>Le blog de tous les temps</h2>
 <div class="d-flex flex-wrap  justify-content-between">
     {%for post in posts%}
         <div class="card" style="margin-right: 10px;width:400px; margin-top: 15px;">
             <div class="card-header">
                 publié le :
-                {#created at : {{ post.date_publication }}}#}
+{#                created at : {{ post.date_publication }}#}
             </div>
             <div class="card-body">
                 <h5 class="card-title">{{post.title}}</h5>

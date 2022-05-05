@@ -28,20 +28,14 @@ class Post
     private $content;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="post_id")
+     * @ORM\Column(type="string", length=255)
      */
-    private $id_user;
+    private $createdAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="post_id")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="posts")
      */
-    private $id_category;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $date_publication;
+    private $category;
 
     public function getId(): ?int
     {
@@ -72,40 +66,27 @@ class Post
         return $this;
     }
 
-    public function getIdUser(): ?User
+    public function getCreatedAt(): ?string
     {
-        return $this->id_user;
+        return $this->createdAt;
     }
 
-    public function setIdUser(?User $id_user): self
+    public function setCreatedAt(string $createdAt): self
     {
-        $this->id_user = $id_user;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function getIdCategory(): ?Category
+    public function getCategory(): ?Category
     {
-        return $this->id_category;
+        return $this->category;
     }
 
-    public function setIdCategory(?Category $id_category): self
+    public function setCategory(?Category $category): self
     {
-        $this->id_category = $id_category;
+        $this->category = $category;
 
         return $this;
     }
-
-    public function getDatePublication(): ?string
-    {
-        return $this->date_publication;
-    }
-
-    public function setDatePublication(?string $date_publication): self
-    {
-        $this->date_publication = $date_publication;
-
-        return $this;
-    }
-
 }
